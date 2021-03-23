@@ -43,3 +43,21 @@ nodejs_demo=> select * from employee;
 (0 rows)
 
 ```
+### Running Sample Application on Ubuntu 20.04
+```
+$ sudo apt-get update -y
+$ sudo apt-get install -y nodejs npm
+$ git clone https://github.com/kul-samples/aws_rds_postgres.git
+$ cd aws_rds_postgres
+
+ubuntu@ip-10-10-10-4:~/aws$ npm install
+added 71 packages from 47 contributors and audited 71 packages in 2.017s
+found 0 vulnerabilities
+
+# update postgres connection string in routes/employees.js
+
+ubuntu@ip-10-10-10-4:~/aws$ node app.js
+Server is running.. on Port 4000
+
+# Ensure in AWS Security Group port 4000 is open for public access or minimum to your laptop IPs
+```
