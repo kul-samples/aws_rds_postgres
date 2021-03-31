@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: thinknyx
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: thinknyx
+  namespace: thinknyx
+data:
+  DB_URL: thinknyx.cpqrk0kuf9qo.us-east-2.rds.amazonaws.com:5432
+  DB_USER: postgres
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: thinknyx
+  namespace: thinknyx
+type: Opaque
+data: 
+  DB_PWD: YWRtaW4xMjMK
+  
