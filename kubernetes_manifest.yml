@@ -50,4 +50,21 @@ spec:
   selector:
     matchLabels:
       app: sample-app
-  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: thinknyx
+  namespace: thinknyx
+  labels:
+    app: sample-app
+spec:
+  selector:
+    app: sample-app
+  ports:
+  - protocol: TCP
+    targetPort: 4000
+    port: 80
+    nodePort: 30000 # Range is 30000-32767
+    name: sample-nodejs-app
+  type: LoadBalancer  ## NodePort ## For Internal Communication ClusterIP
