@@ -19,7 +19,7 @@ metadata:
   namespace: thinknyx
 type: Opaque
 data: 
-  DB_PWD: YWRtaW4xMjMK
+  DB_PWD: YWRtaW4xMjM=
 ---
 apiVersion: apps/v1
 kind: Deployment
