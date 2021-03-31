@@ -61,4 +61,19 @@ Server is running.. on Port 4000
 
 # Ensure in AWS Security Group port 4000 is open for public access or minimum to your laptop IPs
 ```
+### Steps to Install Docker on Ubuntu 20.04
+```
+$ sudo apt-get update -y
+$ sudo apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+$ sudo apt-get update -y
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+$ sudo chown ubuntu:users /var/run/docker.sock
+$ docker version
+```
+### Create Image for the Application
+- `docker image build -t sample-app:latest -f Dockerfile .`
+### Run Container using above image
+- `docker container run -d --name sample-app -e "DB_PWD=admin123" -p 4000:4000 sample-app:latest`
 ### Docker Image Link - https://hub.docker.com/repository/docker/kulbhushanmayer/sample-app
