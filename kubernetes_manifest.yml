@@ -20,4 +20,34 @@ metadata:
 type: Opaque
 data: 
   DB_PWD: YWRtaW4xMjMK
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thinknyx
+  namespace: thinknyx
+  labels:
+    app: sample-app
+  annotations:
+    git-repo: https://github.com/kul-samples/aws_rds_postgres.git
+    tech: nodejs
+    db_type: postgres
+spec:
+  template:
+    metadata:
+      labels: 
+        app: sample-app
+    spec:
+      containers:
+        - name: thinknyx
+          image: kulbhushanmayer/sample-app:1.0
+          envFrom:
+            - configMapRef:
+                name: thinknyx
+            - secretRef:
+                name: thinknyx
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
   
