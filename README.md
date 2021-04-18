@@ -35,7 +35,7 @@ SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 25
 You are now connected to database "nodejs_demo" as user "postgres".
 nodejs_demo=>
 
-nodejs_demo=> \i createTable.sql
+nodejs_demo=> \i createEmployeeTable.sql
 CREATE TABLE
 nodejs_demo=> select * from employee;
  id | name | job | department | salary | hire_date
