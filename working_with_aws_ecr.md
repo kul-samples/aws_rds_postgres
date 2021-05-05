@@ -11,3 +11,11 @@ $ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 $ sudo chown ubuntu:users /var/run/docker.sock
 $ docker version
 ```
+- Steps to create Docker Image, Clone the repo on the Ubuntu Server created and perform the commands as below
+```
+$ cd ~
+$ git clone https://github.com/kul-samples/sample-nodejs-postgres.git
+$ cd sample-nodejs-postgres/
+$ docker image build -t sample-app:1.0 -f Dockerfile .
+$ docker image ls
+```
