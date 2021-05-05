@@ -63,3 +63,26 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Login Succeeded
 ```
+### Push Image to AWS ECR
+- retag image created before as per AWS ECR naming convention & then the push the image using `docker image push`
+```
+ubuntu@ip-172-31-23-246:~/sample-nodejs-postgres$ docker image tag sample-app:1.0 554660509057.dkr.ecr.us-east-2.amazonaws.com/sample-app:1.0
+
+ubuntu@ip-172-31-23-246:~/sample-nodejs-postgres$ docker image ls
+REPOSITORY                                                TAG       IMAGE ID       CREATED          SIZE
+554660509057.dkr.ecr.us-east-2.amazonaws.com/sample-app   1.0       7bbf9379dca5   55 minutes ago   667MB
+sample-app                                                1.0       7bbf9379dca5   55 minutes ago   667MB
+ubuntu                                                    latest    7e0aa2d69a15   11 days ago      72.7MB
+
+ubuntu@ip-172-31-23-246:~/sample-nodejs-postgres$ docker image push 554660509057.dkr.ecr.us-east-2.amazonaws.com/sample-app:1.0
+The push refers to repository [554660509057.dkr.ecr.us-east-2.amazonaws.com/sample-app]
+3b5abf50811f: Pushed
+e00b20382f92: Pushed
+e869905ebfec: Pushed
+83cf146821db: Pushed
+38f168c2293e: Pushed
+2f140462f3bc: Pushed
+63c99163f472: Pushed
+ccdbb80308cc: Pushed
+1.0: digest: sha256:e56854fd4e9afb6fa56e4992c6fc8bb17fb71900649b82b87ea0a76a8d3af0c3 size: 2000
+```
