@@ -1,4 +1,4 @@
-create table employee(
+create table if not exists employee(
 id SERIAL,
 name varchar(50),
 job varchar(40),
