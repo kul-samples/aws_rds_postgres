@@ -77,3 +77,12 @@ $ docker version
 ### Run Container using above image
 - `docker container run -d --name sample-app -e "DB_PWD=admin123" -p 4000:4000 sample-app:latest`
 ### Docker Image Link - https://hub.docker.com/repository/docker/kulbhushanmayer/sample-app
+### Requirements for running Selenium Test Cases
+- Python3.x
+- python modules:
+	- selenium
+	- webdriver_manager
+	- nose
+- Check and updated config.py if needed with correct server value
+- Run `nosetests -vds --with-xunit test_app.py`
+- After the execution of results, a result file nosetests.xml would be created in the folder from where the tests are being executed.
