@@ -4,7 +4,7 @@
 - `psql --version`
 ### Create Sample DB for Demo
 ```
-ubuntu@ip-10-10-10-4:~$ psql -h <postgres_db_endpoint> -U <db_admin_user> -W --dbname postgres
+ubuntu@ip-10-10-10-4:~$ psql -h <postgres_db_endpoint> -U <db_admin_user> -W --dbname nodejs_demo
 Password: <db_admin_pwd>
 psql (12.6 (Ubuntu 12.6-0ubuntu0.20.04.1), server 12.5)
 SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
