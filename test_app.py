@@ -26,7 +26,7 @@ class TestVotePage(TestCase):
 
 
     def test01_page_title(self):
-        self.assertEqual("NodeJs & PostgreSQL CRUD Application",self.driver.title)
+        self.assertEqual("Sample App",self.driver.title)
         # assert True
 
     def test02_form_elements_present(self):
