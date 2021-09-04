@@ -86,3 +86,6 @@ $ docker version
 - Check and updated config.py if needed with correct server value
 - Run `nosetests -vds --with-xunit test_app.py`
 - After the execution of results, a result file nosetests.xml would be created in the folder from where the tests are being executed.
+
+### Running Sonar Analysis
+- `sonar-scanner.bat -D"sonar.organization=kulbhushanmayer" -D"sonar.projectKey=kul-samples_sample-nodejs-postgres" -D"sonar.sources=." -D"sonar.host.url=https://sonarcloud.io" -D"sonar.branch.name=v2"`
