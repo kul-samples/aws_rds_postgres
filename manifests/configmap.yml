@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nodejs-app
+data:
+  DB_USER: postgres
+  DB_NAME: nodejs_demo
+  DB_URL: postgres.kul.svc.cluster.local
