@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      nodeSelector:
+        db: "true"
+      containers:
+      - name: postgres
+        image: postgres
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nodejs-app
+              key: DB_PWD
+        - name: PGDATA
+          value: "/var/lib/postgresql/data/pgdata"
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes: # Use to keep persistent data
+        - name: pgdata
+          hostPath: # Used with directoy location on host
+            path: /PGDATA # location on host
+            type: "DirectoryOrCreate" # will create the directory if it doesn't exists
