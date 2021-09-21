@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: nodejs-app
+  template: # this is the template to be used for pod creation
+    metadata:
+      labels:
+        name: nodejs-app
+    spec:
+      nodeSelector: # Select the node to schedule pods based on label applied on the node
+        team: thinknyx
+      containers:
+      - name: nodejs-app
+        image: kulbhushanmayer/nodejs-app:v1
+        resources:
+          limits: # maximum node resources to be used by this container
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 4000
+            name: nodejs-app
+        env:
+          - name: DB_URL
+            value: postgres.kul.svc.cluster.local
+        envFrom:
+          - secretRef:
+              name: nodejs-app
+      initContainers:
+      - name: create-table
+        image: kulbhushanmayer/nodejs-app:init
+        command:
+          - "sh"
+          - "-c"
+          - "psql -h $DB_URL -U $DB_USER --dbname $DB_NAME < createTable.sql && sleep 20"
+        envFrom:
+          - configMapRef: # Referring value from config map
+              name: nodejs-app
+        env:
+          - name: PGPASSWORD
+            valueFrom: 
+              secretKeyRef:
+                name: nodejs-app
+                key: DB_PWD
