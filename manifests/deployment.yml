@@ -41,7 +41,7 @@ spec:
           - configMapRef: # Referring value from config map
               name: nodejs-app
         env:
-          - name: PGPASSWORD
+          - name: PGPASSWORD # This Postgres internal variable to be used connect without prompting for the password
             valueFrom: 
               secretKeyRef:
                 name: nodejs-app
