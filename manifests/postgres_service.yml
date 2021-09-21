@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  selector: # identify the pods based on the labels mentioned below and expose them for access
+    app: postgres
+  clusterIP: "10.99.12.82"
+  ports:
+  - port: 5432
+    targetPort: postgres
+    name: postgres
+  type: ClusterIP
+  
