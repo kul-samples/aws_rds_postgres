@@ -1,0 +1,7 @@
+apiVersion: v2
+name: postgres
+description: Helm for Postgres Setup
+type: application
+version: 1.0.0
+appVersion: "13.4"
+

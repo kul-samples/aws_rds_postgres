@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Chart.Name }}
+  name: {{ .Chart.Name }}
+spec:
+  ports:
+  - port: {{ .Values.service.port }}
+    protocol: TCP
+    targetPort: {{ .Chart.Name }}
+    nodePort: {{ .Values.service.nodePort }}
+  selector:
+    app: {{ .Chart.Name }}
+  type: {{ .Values.service.type }}
+  clusterIP: {{ .Values.service.clusterIP }}
+

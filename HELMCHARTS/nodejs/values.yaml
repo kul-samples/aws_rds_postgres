@@ -1,0 +1,13 @@
+service:
+  port: 4000
+  containerPort: 4000
+  nodePort: 30000
+  type: NodePort
+  clusterIP: 10.99.12.12
+replicaCount: 2
+image:
+  repository: kulbhushanmayer/nodejs-app
+  tags:
+    app: v2
+    init: database-setup
+

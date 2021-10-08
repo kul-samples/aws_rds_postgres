@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Chart.Name }}
+  name: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      tolerations:
+      - key: type
+        operator: Equal
+        value: database
+        effect: NoSchedule
+      nodeSelector:
+          type: database
+      volumes:
+      - name: {{ .Values.volumes.name }}
+        hostPath:
+          path: /PGDATA
+          type: "DirectoryOrCreate"
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: {{ .Chart.Name }}
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "125m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Chart.Name }}
+              key: DB_PWD
+        - name: PGDATA
+          value: "{{ .Values.volumes.mountPath }}/pgdata"
+        volumeMounts:
+        - name: {{ .Values.volumes.name }}
+          mountPath: "{{ .Values.volumes.mountPath }}"
+        ports:
+        - containerPort: {{ .Values.service.containerPort }}
+          name: {{ .Chart.Name }}
+
