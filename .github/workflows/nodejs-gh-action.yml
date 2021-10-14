@@ -23,6 +23,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: kul-samples/nodejs-gh-actions@v1.0
+      - uses: kul-samples/nodejs-gh-action@v1.0
         with:
           who-to-greet: 'KPMG Team'
