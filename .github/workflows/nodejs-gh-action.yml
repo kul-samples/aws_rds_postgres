@@ -26,3 +26,6 @@ jobs:
       - uses: kul-samples/nodejs-gh-action@v1.1
         with:
           who-to-greet: 'KPMG Team'
+      - uses: jyotsnawadhwani19/nodejs-gh-action@v1.3
+        with:
+          who-to-greet: 'KPMG Team'
