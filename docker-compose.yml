@@ -1,0 +1,45 @@
+version: "3.9" #docker compose syntax version
+volumes:
+  ## All volumes will be creates at /var/lib/docker/volumes
+  pgdata: {}
+networks:
+  nodejs:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 86.10.10.0/24
+          gateway: 86.10.10.5
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:13.4
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=india123
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - nodejs
+  dbsetup:
+    container_name: dbsetup
+    image: kulbhushanmayer/ubuntu:dbSetup
+    environment:
+      - DB_URL=postgres
+    networks:
+      - nodejs
+    depends_on:
+      - postgres
+  app:
+    container_name: app
+    image: kulbhushanmayer/nodejs-app:v1
+    environment:
+      - DB_URL=postgres
+      - DB_USER=postgres
+      - DB_PWD=india123
+    ports:
+      - "4000:4000"
+    depends_on:
+      - dbsetup
+    networks:
+      - nodejs
